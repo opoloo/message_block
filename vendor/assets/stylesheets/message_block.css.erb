@@ -1,39 +1,64 @@
 .message_block {
-  clear: both;
-  margin: 12px 0;
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  background-color: #000;
+  opacity: 0.8;
+  -webkit-box-shadow: 0 5px 10px #000 ;
+  -moz-box-shadow: 0 5px 10px #000 ;
+  box-shadow: 0 5px 10px #000 ;
+  cursor: pointer;
+}
+
+a#close_notification {
+  display: block;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  text-indent: -99999px;
+  background: url(<%= asset_path("message_block/close.png") %>) center center no-repeat;
 }
 
 .message_block ul {
-  border-bottom: 1px solid #ecd757;
-  border-top: 1px solid #ecd757;
+  display: table;
+  margin: 0 auto;
   list-style: none;
-  padding: 10px;
+  padding: 20px;
 }
 .message_block ul li {
-  margin-left: 3em;
+  margin-left: 30px;
+}
+
+.message_block ul {
+  background: url(<%= asset_path("message_block/ic_action_warning.png") %>) 16px 50% no-repeat;
 }
 
 .message_block ul.error {
-  background: #fcf6d0 url(<%= asset_path("message_block/error.gif") %>) 16px 50% no-repeat;
+  background: url(<%= asset_path("message_block/ic_action_warning.png") %>) 16px 50% no-repeat;
 }
 
 .message_block ul.alert {
-  background: #fcf6d0 url(<%= asset_path("message_block/alert.gif") %>) 16px 50% no-repeat;
+  background: url(<%= asset_path("message_block/ic_action_warning.png") %>) 16px 50% no-repeat;
 }
 
 .message_block ul.info {
-  background: #fcf6d0 url(<%= asset_path("message_block/info.gif") %>) 16px 50% no-repeat;
+  background: url(<%= asset_path("message_block/ic_action_tick.png") %>) 16px 50% no-repeat;
 }
 
 .message_block ul.notice {
-  background: #fcf6d0 url(<%= asset_path("message_block/notice.gif") %>) 16px 50% no-repeat;
+  background: url(<%= asset_path("message_block/ic_action_tick.png") %>) 16px 50% no-repeat;
 }
 
 .message_block ul.confirm {
-  background: #fcf6d0 url(<%= asset_path("message_block/confirm.gif") %>) 16px 50% no-repeat;
+  background: url(<%= asset_path("message_block/ic_action_tick.png") %>) 16px 50% no-repeat;
 }
 
 .message_block ul.warn {
-  background: #fcf6d0 url(<%= asset_path("message_block/warn.gif") %>) 1em 50% no-repeat;
+  background: url(<%= asset_path("message_block/ic_action_warning.png") %>) 16px 50% no-repeat;
 }
 

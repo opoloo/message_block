@@ -35,17 +35,30 @@ module MessageBlock
       end.flatten.select {|m| !m.nil? }
       
       model_errors = model_objects.inject([]) {|b, m| b += m.errors.full_messages }
-      
+
+      devise_errors = ''
+      if defined? resource
+        devise_errors = content_tag(:ul, class: 'error') do
+          resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe
+        end
+      end
+
       flash_messages[options[:model_error_type].to_sym] ||= []
       flash_messages[options[:model_error_type].to_sym] += model_errors
-      
+
       contents = flash_messages.keys.sort_by(&:to_s).select {|type| !flash_messages[type.to_sym].empty? }.map do |type|
         "<ul class=\"#{type}\">" + flash_messages[type.to_sym].map {|message| "<li>#{message}</li>" }.join + "</ul>"
       end.join
-      
+      contents += devise_errors.html_safe unless devise_errors == ""
+
+      # Add devise errors
+
+
       unless contents.blank?
         if options[:container]
-          content_tag(options[:container], contents, options[:html], false)
+          content_tag(options[:container], options[:html], false) do
+            content_tag(:a, "close", href: '#', id: 'close_notification') + contents.html_safe
+          end
         else
           contents
         end

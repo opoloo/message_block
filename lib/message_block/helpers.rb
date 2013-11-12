@@ -37,7 +37,7 @@ module MessageBlock
       model_errors = model_objects.inject([]) {|b, m| b += m.errors.full_messages }
 
       devise_errors = ''
-      if defined? resource
+      if defined?(resource) && resource.errors.count > 0
         devise_errors = content_tag(:ul, class: 'error') do
           resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe
         end
@@ -49,7 +49,7 @@ module MessageBlock
       contents = flash_messages.keys.sort_by(&:to_s).select {|type| !flash_messages[type.to_sym].empty? }.map do |type|
         "<ul class=\"#{type}\">" + flash_messages[type.to_sym].map {|message| "<li>#{message}</li>" }.join + "</ul>"
       end.join
-      contents += devise_errors.html_safe unless devise_errors == ""
+      contents += devise_errors.html_safe unless devise_errors.blank?
 
       # Add devise errors
 
